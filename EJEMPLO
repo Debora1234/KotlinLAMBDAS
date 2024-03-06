@@ -1,0 +1,44 @@
+//funcion de orden superior que recibe un entero y una funcion (esta segunda función recibe un entero y devuelve un booleano),
+// y retrona un booleano, la funcion de orden superior
+fun funOrdenSuperior(numero: Int, funcion: (Int) -> Boolean): Boolean {
+    return funcion(numero)
+}
+
+
+fun main() {
+    val miNumero = 5
+
+    // Comprobar si el número es par
+    val numeroParLambda: (Int) -> Boolean = 
+    	{ num -> num % 2 == 0 }
+    val resultadoPar = funOrdenSuperior(miNumero, numeroParLambda)
+    println("¿Es el número par? $resultadoPar")
+
+    // Comprobar si el número es primo
+    val numeroPrimoLambda: (Int) -> Boolean = 
+        { num ->
+            if (num < 2) false
+            else (2 until num).all { i -> num % i != 0 }
+        }
+    val resultadoPrimo = funOrdenSuperior(miNumero, numeroPrimoLambda)
+    println("¿Es el número primo? $resultadoPrimo")
+    
+    // Comprobar si el número es guay 
+    val numeroGuayLambda: (Int) -> Boolean =
+     	{ num ->
+                var i = 1
+                var guay = 0
+                while (guay < num) {
+                    guay += i
+                    i++
+                }
+                guay == num
+    	}
+    val resultadoGuay = funOrdenSuperior(miNumero, numeroGuayLambda)
+    println("¿Es el número guay? $resultadoGuay")
+}
+
+
+
+// La función que ejecuta funOrdenSuperior es la función que se pasa como segundo argumento a funOrdenSuperior. 
+// En el ejemplo proporcionado, se utilizan tres funciones lambda diferentes
